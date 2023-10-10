@@ -1,0 +1,74 @@
+class SpaceBattle {
+  void startBattle() {
+    Player player = Player();
+    Enemy enemy = Enemy();
+    List<int> actions = [0, 0, 1, 1, 1]; 
+
+    bool gameWon = false;
+    bool gameLost = false;
+    
+      for (int i = 0; i < actions.length; i++) {
+        if (actions[i] == 1) {
+          enemy.takeDamage(10);
+          print("EnemyHP: ${enemy.getHP()}");
+        } else {
+          player.takeDamage(10);
+          print("PlayerHP: ${player.getHP()}");
+        }
+      }
+    
+      if (player.isDead()) {
+        gameLost = true;
+        print("Du hast verloren! Deine Lebenspunkte sind auf 0 gefallen.");
+      }
+
+      if (enemy.isDestroyed()) {
+        gameWon = true;
+        print("Du hast gewonnen! Das feindliche Raumschiff wurde zerstört.");
+      }
+    
+      if (!gameWon && !gameLost) {
+      print("Beide kamen mit dem Leben grad noch so davon");
+    }
+  }
+}
+
+class Player {
+  int playerHP = 100;
+  
+   int getHP() {
+    return playerHP;
+  }
+  
+  void takeDamage(int damage) {
+    playerHP -= damage;
+  }
+
+  bool isDead() {
+    return playerHP <= 0;
+  }
+}
+
+class Enemy {
+  int enemyHP = 100;
+  
+    int getHP() {
+    return enemyHP;
+  }
+
+  void takeDamage(int damage) {
+    enemyHP -= damage;
+  }
+
+  bool isDestroyed() {
+    return enemyHP <= 0;
+  }
+}
+
+void main() {
+  SpaceBattle spaceBattle = SpaceBattle();
+  spaceBattle.startBattle();
+}
+
+
+
